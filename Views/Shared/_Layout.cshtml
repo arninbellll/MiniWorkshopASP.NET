@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Mini Workshop FENDY</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+ 
+
+
+
+
+
+</head>
+<body>
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark flex-column flex-md-row"   style="background-color: #fdd137;">
+        
+        <a class="navbar-brand ml-4" href="/">FENDY</a>
+            <div class="navbar-nav">
+                <ul class="navbar-nav flex-row">
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/Categories">Category</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/Products">Product</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/Customers">Customer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/Employees">Employee</a>
+                    </li>
+                </ul>
+            </div>
+            <ul class="navbar-nav ml-md-auto">
+                <li class="nav-item my-2 my-lg-0">
+                    @Html.Partial("_LoginPartial")
+                </li>
+            </ul>
+
+
+            
+    </nav>
+   
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - FENDY BEAUTY mini workshop Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,94 @@
+﻿@model IEnumerable<MiniWS.Models.Cart>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Cart</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+
+            <td>
+                <button class="btn btn-outline-primary">  @Html.ActionLink("Edit", "Edit", new { id = item.CartId }) </button>
+                <button class="btn btn-outline-warning">  @Html.ActionLink("Details", "Details", new { id = item.CartId })</button>
+                <button class="btn btn-outline-danger">  @Html.ActionLink("Delete", "Delete", new { id = item.CartId })</button>
+            </td>
+        </tr>
+    }
+
+</table>
+<h4>Your orders</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th> No.</th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ int row = 0;}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@(++row)</td>
+                <td>@item.Product.ProductName</td>
+                <td>@item.Product.UnitPrice</td>
+                <td>@item.Quantity</td>
+                <td>@item.Total.ToString("n2")</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+       
+            @foreach (var tt in Model)
+            {<tr>
+                <td colspan="3"></td>
+                <td>Sub Total.</td>
+                <td class="text-right">@tt.SubTotal</td>
+            </tr>
+            <tr>
+                <td colspan="3"></td>
+                <td>VAT 7%</td>
+                <td class="text-right">@tt.VatAmount</td>
+            </tr>
+            <tr>
+                <td colspan="3"></td>
+                <td>Net Total.</td>
+                <td class="text-right">@tt.NetTotal</td>
+            </tr>
+                }
+
+            
+        </tfoot>
+</table>
+
+

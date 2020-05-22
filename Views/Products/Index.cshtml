@@ -1,0 +1,92 @@
+﻿@model IEnumerable<MiniWS.Models.Product>
+@{
+    ViewBag.Title = "Products Fendy";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+
+
+
+<h2 style="text-align:center">Our Products</h2>
+<hr />
+
+<p>
+    <button class="btn btn-outline-warning">
+        @Html.ActionLink("Create New", "Create")
+    </button>
+</p>
+  
+<div class="row fl">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <div class="card" style="text-align:center;align-items:center">
+                <img src="@Url.Content(item.ImagePath)" width="250" height="250" />
+                <p>
+                    <h4> @Html.DisplayFor(modelItem => item.ProductName)</h4>
+                    <h5> @Html.DisplayFor(modelItem => item.UnitPrice) Bath</h5>
+
+                </p>
+                <button class="btn btn-outline-warning">
+                    @Html.ActionLink("Details", "Details", new { id = item.ProductId })
+                </button>
+                
+            </div>
+        </div>
+    
+    }   
+</div>
+   
+<div class="row-cols-1">
+    <img src="../../Image/stian.jpg")" />
+</div>
+    
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Category.CategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Supplier.CompanyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImagePath)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Supplier.CompanyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitPrice)
+                </td>
+                
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ProductId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    

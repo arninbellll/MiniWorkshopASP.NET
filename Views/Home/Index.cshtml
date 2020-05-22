@@ -1,0 +1,58 @@
+﻿@model IEnumerable<MiniWS.Models.Product>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron" style="background-image:url(../../image/preview6.jpg)">
+
+    <h1 style="color:white">FENDY BEAUTY</h1>
+    <p class="lead" style="color:azure">Let,s it be. Glowing, Shining, Sparking </p>
+    <p><a href="https://fenty.com" class="btn btn-outline-warning btn-lg">Fenty &raquo;</a></p>
+</div>
+
+<div class="row font">
+    <div class="col-md-4 jumbotron " style="background-image:url(../../image/lip2.jpg)">
+        <h3>HAND-PICKED JUST FOR YOU</h3>
+        <p>
+            A FentyBeauty.com exclusive: This 6-pc set of full-sized makeup essentials is everything you need
+            to create the look Rihanna wore at the Sun Stalk’r Bronzer Launch Party.
+        </p>
+        <p><a class="btn btn-outline-dark" href="https://fenty.com">Shop now &raquo;</a></p>
+    </div>
+    <div class="col-md-4 jumbotron" style="background-image:url(../../image/fd4.jpg)">
+        <h3>YOU'LL LOVE THIS</h3>
+        <p>
+            Always a stunna, Rihanna stole the show in DJ Khaled’s
+            "Wild Thoughts" music video wearing…
+        </p>
+        <p><a class="btn btn-outline-dark" href="https://fenty.com">Shop now &raquo;</a></p>
+    </div>
+    <div class="col-md-4 jumbotron" style="background-image:url(../../image/eye3.jpg)">
+        <h3>
+            DOWN FOR MORE?
+            WE GOT YOU.
+        </h3>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-outline-dark" href="https://fenty.com">Shop now &raquo;</a></p>
+    </div>
+</div>
+<div class="row fl">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <div class="card" style="text-align:center;align-items:center">
+                <hr />
+                <img src="@Url.Content(item.ImagePath)" width="250" height="250" />
+                <p>
+                    <h4> @Html.DisplayFor(modelItem => item.ProductName)</h4>
+                    <h5> @Html.DisplayFor(modelItem => item.UnitPrice) Bath</h5>
+
+                </p>
+                <button id="btnAdd" type="button" class="btn btn-warning">
+                @Html.ActionLink("Shop","Index","Products")</button>
+                <hr />
+            </div>
+        </div>
+
+    }
+</div>

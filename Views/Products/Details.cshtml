@@ -1,0 +1,65 @@
+﻿@model MiniWS.Models.Product
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div >
+    <h4>Product</h4>
+    <hr />
+    <div class="row">
+        <div class="col-3">
+            <img style="align-items:center" src="@Url.Content(Model.ImagePath)" width="250" height="250" />
+        </div>
+        
+        <div class="col-md-3">
+            <dl class="dl-horizontal " style="align-items:center">
+                <dd>
+                    @Html.DisplayFor(model => model.ProductName)
+                </dd>
+
+                <dd>
+                    @Html.DisplayNameFor(model => model.QuantityPerUnit) : @Html.DisplayFor(model => model.QuantityPerUnit)
+                </dd>
+                <dd>
+                    @Html.DisplayNameFor(model => model.UnitPrice): @Html.DisplayFor(model => model.UnitPrice)
+                </dd>
+
+                <dd>
+                    @Html.DisplayNameFor(model => model.InStock): @Html.DisplayFor(model => model.InStock)
+                </dd>
+                <dd>
+                    @Html.DisplayNameFor(model => model.OnOrder): @Html.DisplayFor(model => model.OnOrder)
+                </dd>
+            </dl>
+            <form asp-action="Details " method="post" style="align-items:center">
+
+                <input type="hidden" name="ProductId" value="@Model.ProductId" class="form-control" />
+                <input type="hidden" name="UnitPrice" value="@Model.UnitPrice" class="form-control" />
+                <input id="CtQty" name="Qty" type="number" class="form-control" />
+                <button type="submit" class="btn btn-sm btn-outline-success"> Add </button>
+            </form>
+        </div>
+    
+    
+ </div>
+
+</div>
+
+<hr />
+<p>
+    <button class="btn btn-outline-warning"> @Html.ActionLink("Edit", "Edit", new { id = Model.ProductId }) </button>
+    <button class="btn btn-outline-primary">@Html.ActionLink("Back to List", "Index") </button>
+</p>
+
+@section Scripts {
+    <script type="text/javascript">
+
+        $("btnAdd").click(() => {
+            addOrderItem();
+        })
+
+    </script>
+    }

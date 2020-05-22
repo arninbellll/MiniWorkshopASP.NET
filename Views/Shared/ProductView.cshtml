@@ -1,0 +1,22 @@
+﻿@model IEnumerable<MiniWS.Models.Product>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="row fl">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <div class="card" style="text-align:center;align-items:center">
+                <img src="@Url.Content(item.ImagePath)" width="250" height="250" />
+                <p>
+                    <h4> @Html.DisplayFor(modelItem => item.ProductName)</h4>
+                    <h5> @Html.DisplayFor(modelItem => item.UnitPrice) Bath</h5>
+
+                </p>
+                <button id="btnAdd" type="button" class="btn btn-warning"> Add to cart</button>
+            </div>
+        </div>
+
+    }
+</div>

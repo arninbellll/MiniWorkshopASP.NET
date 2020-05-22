@@ -1,0 +1,154 @@
+﻿@model MiniWS.Models.Order
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.CompanyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.CompanyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Shipper.CompanyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Shipper.CompanyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RequiredDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RequiredDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShippedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShippedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.freight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.freight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShipName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShipName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShipAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShipAddress)
+        </dd>
+
+
+    </dl>
+    <hr />
+
+</div>
+<table class="table table-bordered w-75">
+    <thead>
+        <tr>
+            <th>Product name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @Html.DropDownList("ProductId", (SelectList)ViewBag.Products, htmlAttributes: new { @class = "form-control" })
+            </td>
+            <td>
+                <label id="lblPrice"></label>
+            </td>
+            <td>
+                <input id="txtQuantity" type="number" class="form-control" />
+            </td>
+            <td><button id="btnAdd" type="button" class="btn btn-sm btn-success"> Add </button></td>
+        </tr>
+    </tbody>
+</table>
+
+<hr />
+<h4>Order Item</h4>
+<div id="tbl"></div>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OrderId }) |
+    @Html.ActionLink("Back to List", "Index", "Customers")
+</p>
+
+@section Scripts {
+    <script type="text/javascript">
+        updateUI();
+
+        $("#btnAdd").click(() => {
+            addOrderItem();
+        })
+
+        function addOrderItem() {
+            const url = '@Url.Action("AddOrderDetail", "Orders", new { id = Model.OrderId })';
+
+            let data = {
+                ProductId: $("#ProductId").val(),
+                Quantity: $("#txtQuantity").val(),
+            }
+            console.log(data);
+            $.post(url, data).then((res) => {
+                updateUI();
+                $("#txtQuantity").val("");
+            })
+        }
+
+        function updateUI() {
+            const url = '@Url.Action("GetOrderDetail", "Orders", new { id = Model.OrderId })';
+
+            $.get(url).then((res) => {
+                $("#tbl").html(res);
+            });
+        }
+    </script>
+    }
